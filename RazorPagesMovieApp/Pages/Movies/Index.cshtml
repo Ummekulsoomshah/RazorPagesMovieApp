@@ -1,0 +1,76 @@
+﻿@page "{searchString?}"
+@model RazorPagesMovieApp.Pages.Movies.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create" type="button" class="btn btn-success">Create New</a>
+</p>
+<ul class="nav nav-tabs">
+    <li class="nav-item dropdown">
+     <select asp-for="MovieGenre" asp-items="Model.Genres">
+            <option value="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">All</option>
+     </select>
+    </li>
+    <li class="nav-item">
+    Date : <input asp-for="StartDate" type="date" />
+    <input asp-for="EndDate" type="date" />
+    </li>
+    <li class="nav-item">
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="button" class="btn btn-primary" type="submit" value="Filter" />
+    </li>
+</ul>
+<table class=" table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Movie) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+
+                <td class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a asp-page="./Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning">Edit</a> 
+                    <a asp-page="./Details" asp-route-id="@item.Id" type="button" class="btn btn-success">Details</a>  
+                    <a asp-page="./Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
