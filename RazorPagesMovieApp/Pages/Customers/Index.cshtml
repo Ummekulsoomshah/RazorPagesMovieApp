@@ -1,0 +1,48 @@
+﻿@page
+@model RazorPagesMovieApp.Pages.Customers.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create" type="button" class="btn btn-success">Create New</a>
+</p>
+<table class=" table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.customer[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer[0].Membershiptype)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer[0].Birth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.customer) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Membershiptype)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birth)
+            </td>
+            <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" type="button" class="btn btn-primary">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id" type="button" class="btn btn-primary">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id" type="button" class="btn btn-primary">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
